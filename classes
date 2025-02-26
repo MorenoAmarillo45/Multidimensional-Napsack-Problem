@@ -1,0 +1,19 @@
+from math import ceil
+from pathlib import Path
+import json
+import random
+import copy
+
+class MultiDItem:
+  def __init__(self, name, profit, weight_dict):
+    self.name = name
+    self.profit = profit
+    self.weight = weight_dict
+    self.list_dimensions = weight_dict.keys()
+    self.d =  len(weight_dict)
+  
+  def __str__(self):
+    return f"MultiDItem({self.name},profit:{self.profit},weights:{self.weight})"
+  
+  def __repr__(self):
+    return f"Item {self.name}: \nProfit {self.profit}, \nWeights {self.weight}"
