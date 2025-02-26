@@ -17,3 +17,26 @@ class MultiDItem:
   
   def __repr__(self):
     return f"Item {self.name}: \nProfit {self.profit}, \nWeights {self.weight}"
+
+class MultiDKnapsack:
+  def __init__(self, name, capacity_dict):
+    self.name = name
+    self.capacity = capacity_dict
+    self.list_dimensions = capacity_dict.keys()
+    self.d = len(capacity_dict)
+    self.items = []
+    self.used_capacity = {dim: 0 for dim in capacity_dict}
+  
+  def total_profit(self):
+    return sum(item.profit for item in self.items)
+
+  def add_item(self,item):
+    if item in self.items:
+      print(f"{item.name} already inside knapsack {self.name}")
+      return False
+    if all(sel.used_capacity[dim] + item.weight[dim] <= self.capacity[dim] for dim in item.list_dimensions):
+      self.items.append(item)
+      for dim in item.list_dimensions:
+        self.used_capacity += item.weight[dim]
+        return True
+    return False
